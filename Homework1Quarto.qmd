@@ -4,10 +4,33 @@ format: html
 editor: visual
 ---
 
-Link to Github Project:
+Link to Github Project: https://github.com/grobertson881/stats506-homework1
 
 **Problem 1**
 
+1a)
+```{r}
+# Read in data and assign column names
+abaloneData <- read.table("/Users/gracerobertson/Desktop/stats506/abalone/abalone.data", sep = ",")
+abaloneNames <- c("Sex", "Length", "Diameter", "Height", "Whole Weight", "Shucked Weight", 
+                  "Viscera Weight", "Shell Weight", "Rings")
+colnames(abaloneData) <- abaloneNames
+```
+
+1b)
+```{r}
+# Report number of observations from each sex
+numMData = length(which(abaloneData$Sex == "M"))
+numFData = length(which(abaloneData$Sex == "F"))
+numIData = length(which(abaloneData$Sex == "I"))
+print(paste("Number of Male Observations: ", numMData))
+print(paste("Number of Female Observations: ", numFData))
+print(paste("Number of Infant Observations: ", numIData))
+```
+
+There are 1528 male observations, 1307 female observations, and 1342 infant observations.
+
+1c)
 ```{r}
 
 ```
