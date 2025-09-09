@@ -8,7 +8,8 @@ Link to Github Project: https://github.com/grobertson881/stats506-homework1
 
 **Problem 1**
 
-1a)
+**1a)**
+
 ```{r}
 # Read in data and assign column names
 abaloneData <- read.table("/Users/gracerobertson/Desktop/stats506/abalone/abalone.data", sep = ",")
@@ -17,7 +18,8 @@ abaloneNames <- c("Sex", "Length", "Diameter", "Height", "Whole Weight", "Shucke
 colnames(abaloneData) <- abaloneNames
 ```
 
-1b)
+**1b)**
+
 ```{r}
 # Report number of observations from each sex
 numMData = length(which(abaloneData$Sex == "M"))
@@ -28,11 +30,276 @@ print(paste("Number of Female Observations: ", numFData))
 print(paste("Number of Infant Observations: ", numIData))
 ```
 
+**ANSWER**
 There are 1528 male observations, 1307 female observations, and 1342 infant observations.
 
-1c)
+**1c)**
+
 ```{r}
+corWhole <- cor(abaloneData$`Whole Weight`, abaloneData$Rings)
+corShucked <- cor(abaloneData$`Shucked Weight`, abaloneData$Rings)
+corViscera <- cor(abaloneData$`Viscera Weight`, abaloneData$Rings)
+corShell <- cor(abaloneData$`Shell Weight`, abaloneData$Rings)
+print(paste("Correlation with Whole Weight: ", corWhole))
+print(paste("Correlation with Shucked Weight: ", corShucked))
+print(paste("Correlation with Viscera Weight: ", corViscera))
+print(paste("Correlation with Shell Weight: ", corShell))
+```
+
+```{r}
+maleData <- abaloneData[abaloneData$Sex == "M",]
+femaleData <- abaloneData[abaloneData$Sex == "F",]
+infantData <- abaloneData[abaloneData$Sex == "I",]
+maleCor <- cor(maleData$`Shell Weight`, maleData$Rings)
+femaleCor <- cor(femaleData$`Shell Weight`, femaleData$Rings)
+infantCor <- cor(infantData$`Shell Weight`, infantData$Rings)
+print(paste("Correlation for Males: ", maleCor))
+print(paste("Correlation for Females: ", femaleCor))
+print(paste("Correlation for Infants: ", infantCor))
+```
+
+```{r}
+maxRingIndex <- which.max(abaloneData$Rings)
+print(paste("Whole weight for most rings: ", abaloneData$`Whole Weight`[maxRingIndex]))
+print(paste("Shucked weight for most rings: ", abaloneData$`Shucked Weight`[maxRingIndex]))
+print(paste("Viscera weight for most rings: ", abaloneData$`Viscera Weight`[maxRingIndex]))
+print(paste("Shell weight for most rings: ", abaloneData$`Shell Weight`[maxRingIndex]))
+```
+
+```{r}
+#' Is Viscera Weight Larger than Shell Weight
+#'
+#' @param visceraWeight numeric vector
+#' @param shellWeight numeric vector of same length as visceraWeight
+#'
+#' @returns vector of same length as input, but with TRUE or FALSE; TRUE indicates viscera weight is greater than shell weight; false indicates the opposite
+isVisceraLarger <- function(visceraWeight, shellWeight) {
+output <- c()
+  for (i in seq_along(visceraWeight)) {
+    if (visceraWeight[i] > shellWeight[i]) {
+      output <- c(output, TRUE)
+    } else {
+      output <- c(output, FALSE)
+    }
+  }
+  return(output)
+}
+
+isVisceraLargerData <- isVisceraLarger(abaloneData$`Viscera Weight`, abaloneData$`Shell Weight`)
+visceraLarger <- length(which(isVisceraLargerData == TRUE))
+totalData <- length(abaloneData$`Viscera Weight`)
+
+print(paste("Percent viscera > shell: ", ((visceraLarger / totalData) * 100), "%"))
+```
+
+**ANSWER**
+1.  Shell weight has the highest correlation with rings.
+2.  Shell weight and rings have the highest correlation for infants.
+3.  The abalone with the most rings has the following weights: Whole weight = 1.8075; Shucked weight = 0.7055; Viscera weight = 0.3215; Shell weight = 0.475.
+4.  6.512% of abalones have a viscera weight larger than their shell weight.
+
+**Problem 2**
+
+**2a)**
+
+```{r}
+# Read in data
+foodData <- read.csv("/Users/gracerobertson/Desktop/stats506/food_expenditure.csv", sep = ",")
+```
+
+**2b)**
+
+```{r}
+# Simplify column names
+colnames(foodData) <- c("ID", "Age", "NumDependents", "State", "TypeCurrency", "TotalExpenditure", 
+                        "GroceryExpenditure", "DiningExpenditure", "MiscExpenditure", 
+                        "NumTimesDining", "AlcoholIncluded", "FoodAssistancePrograms") 
+```
+
+**2c)**
+
+```{r}
+# Restrict data to only US dollars
+foodDataUS <- foodData[foodData$TypeCurrency == "USD",]
+print(paste("Length of total food data: ", nrow(foodData)))
+print(paste("Length of US food data: ", nrow(foodDataUS)))
+```
+
+**2d)**
+
+```{r}
+# Clean data related to age
+# Rule: remove NA; looking at data from people aged 18-85
+foodDataClean <- na.omit(foodDataUS)
+foodDataClean <- foodDataClean[foodDataClean$Age > 18 & foodDataClean$Age < 85,]
+```
+
+**2e)**
+
+```{r}
+# Clean data related to state
+# Rule: remove blank values; look at data only from midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI)
+foodDataClean <- foodDataClean[foodDataClean$State != "",]
+foodDataClean <- foodDataClean[foodDataClean$State == "IL" | 
+                                 foodDataClean$State == "IN" | 
+                                 foodDataClean$State == "IA" | 
+                                 foodDataClean$State == "KS" | 
+                                 foodDataClean$State == "MI" | 
+                                 foodDataClean$State == "MN" | 
+                                 foodDataClean$State == "MO" | 
+                                 foodDataClean$State == "NE" | 
+                                 foodDataClean$State == "ND" | 
+                                 foodDataClean$State == "OH" | 
+                                 foodDataClean$State == "SD" | 
+                                 foodDataClean$State == "WI",]
 
 ```
 
+**2f)**
 
+```{r}
+# Clean data related to four food expenditure variables
+# Rule: remove blank values, remove negative values
+foodDataClean <- foodDataClean[foodDataClean$TotalExpenditure != "" & foodDataClean$TotalExpenditure > 0 & foodDataClean$GroceryExpenditure != "" & foodDataClean$GroceryExpenditure > 0 & foodDataClean$DiningExpenditure != "" & foodDataClean$DiningExpenditure > 0 & foodDataClean$MiscExpenditure != "" & foodDataClean$MiscExpenditure > 0,] 
+```
+
+**2g)**
+
+```{r}
+# Clean data related to # of times dining out
+# Rule: only look at people that are primarily making food at home (< 10 times dining out)
+foodDataClean <- foodDataClean[foodDataClean$NumTimesDining < 10,]
+```
+
+**2h)**
+
+```{r}
+# Report final observations after cleaning
+print(paste("Number of observations after cleaning: ", nrow(foodDataClean)))
+```
+
+**ANSWER**
+
+Rules
+1. Only data from the United States
+2. Remove rows with a field that is NA
+3. Only use ages 18-85 to represent all adults
+4. Only look at data from Midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI)
+5. For food expenditures, remove blank or negative values
+6. Only look at people who are primarily making food at home (< 10 times dining out)
+
+There were only 20 observations left after this cleaning. 
+
+**Problem 3**
+
+**3a)**
+
+```{r}
+#' Find the next number in its Collatz sequence
+#'
+#' @param input a positive integer
+#'
+#' @returns a positive integer 
+nextCollatz <- function(input) {
+  # Check if it is a number, integer, and positive
+  if (!is.numeric(input)) {
+    stop("Input must be a positive integer")
+  } else if (input != floor(input)) { # 
+    stop("Input must be an integer")
+  } else if (input < 0) {
+    stop("Input must be positive")
+  }
+  
+  if ((input %% 2) == 0) {
+    # Even numbers
+    output = input/2
+  } else {
+    # Odd numbers
+    output = (3 * input) + 1
+  }
+  return(output)
+}
+
+## Examples
+nextCollatz(5)
+nextCollatz(16)
+```
+
+**3b)**
+
+```{r}
+#' Find the Collatz Sequence for a Given Input
+#'
+#' @param input a positive integer
+#'
+#' @returns a list containing the vector of the entries in the Collatz sequence, beginning at the input and ending at 1; and the length of the Collatz seqeunce
+collatzSequence <- function(input) {
+  # Check if it is a number, integer, and positive
+  if (!is.numeric(input)) {
+    stop("Input must be a positive integer")
+  } else if (input != floor(input)) { # 
+    stop("Input must be an integer")
+  } else if (input < 0) {
+    stop("Input must be positive")
+  }
+  
+  # Create output list with an empty vector
+  vector <- c()
+  
+  # Enter in first input to the sequence
+  vector <- c(vector, input, nextCollatz(input))
+  
+  # until the last value of output is 1, keep adding next value
+  while (vector[length(vector)] != 1) {
+    nextValue <- nextCollatz(vector[length(vector)])
+    vector <- c(vector, nextValue)
+  }
+  
+  # put the vector into a list for the proper output
+  output <- list(vector, length(vector))
+  return(output)
+}
+
+## Examples
+collatzSequence(5)
+collatzSequence(19)
+```
+
+**3c)**
+
+```{r}
+# Set initial values
+inputValues <- 100:500
+maxLength <- 0
+maxIndex <- -1
+#minLength <- 100000000
+#minIndex <- -1
+
+## SEP 9 -- CODE IS NOT WORKING, BOTH MAX AND MIN ARE SET TO LAST VALUE, NOT ACTUAL VALUE
+
+# loop through all input values and compare the lengths to the ones before to find maximum
+for (i in length(inputValues)) {
+  currentCollatz <- collatzSequence(inputValues[i])
+  currentSeqLength <- currentCollatz[[2]]
+  
+  maxLength <- max(maxLength, currentSeqLength)
+  
+  #if (currentSeqLength > maxLength) {
+  #  maxLength <- currentSeqLength
+  #  maxIndex <- i
+  #}
+  
+
+}
+
+print(paste("Max length: ", maxLength, " found at: ", maxIndex))
+#print(paste("Min length: ", minLength, " found at: ", minIndex))
+
+```
+
+```{r}
+
+  if (currentSeqLength < minLength) {
+    minLength <- currentSeqLength
+    minIndex <- i
+  }
