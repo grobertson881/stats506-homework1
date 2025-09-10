@@ -100,56 +100,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Problem 1</strong></p>
 <p><strong>1a)</strong></p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data and assign column names</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>abaloneData <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/Users/gracerobertson/Desktop/stats506/abalone/abalone.data"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>abaloneNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Sex"</span>, <span class="st">"Length"</span>, <span class="st">"Diameter"</span>, <span class="st">"Height"</span>, <span class="st">"Whole Weight"</span>, <span class="st">"Shucked Weight"</span>, </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"Viscera Weight"</span>, <span class="st">"Shell Weight"</span>, <span class="st">"Rings"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(abaloneData) <span class="ot">&lt;-</span> abaloneNames</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <p><strong>1b)</strong></p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Report number of observations from each sex</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>numMData <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">which</span>(abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"M"</span>))</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>numFData <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">which</span>(abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"F"</span>))</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>numIData <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">which</span>(abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"I"</span>))</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Number of Male Observations: "</span>, numMData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Number of Male Observations:  1528"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Number of Female Observations: "</span>, numFData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Number of Female Observations:  1307"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Number of Infant Observations: "</span>, numIData))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Number of Infant Observations:  1342"</code></pre>
 </div>
 </div>
-<p><strong>ANSWER</strong> There are 1528 male observations, 1307 female observations, and 1342 infant observations.</p>
+<p><em>ANSWER</em></p>
+<p>There are 1528 male observations, 1307 female observations, and 1342 infant observations.</p>
 <p><strong>1c)</strong></p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>corWhole <span class="ot">&lt;-</span> <span class="fu">cor</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Whole Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span>Rings)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>corShucked <span class="ot">&lt;-</span> <span class="fu">cor</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shucked Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span>Rings)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>corViscera <span class="ot">&lt;-</span> <span class="fu">cor</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span>Rings)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>corShell <span class="ot">&lt;-</span> <span class="fu">cor</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span>Rings)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation with Whole Weight: "</span>, corWhole))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation with Whole Weight:  0.540389676923904"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation with Shucked Weight: "</span>, corShucked))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation with Shucked Weight:  0.420883657945217"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation with Viscera Weight: "</span>, corViscera))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation with Viscera Weight:  0.503819248759774"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation with Shell Weight: "</span>, corShell))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation with Shell Weight:  0.627574044510329"</code></pre>
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>maleData <span class="ot">&lt;-</span> abaloneData[abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"M"</span>,]</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>femaleData <span class="ot">&lt;-</span> abaloneData[abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"F"</span>,]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>infantData <span class="ot">&lt;-</span> abaloneData[abaloneData<span class="sc">$</span>Sex <span class="sc">==</span> <span class="st">"I"</span>,]</span>
@@ -157,60 +184,345 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>femaleCor <span class="ot">&lt;-</span> <span class="fu">cor</span>(femaleData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>, femaleData<span class="sc">$</span>Rings)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>infantCor <span class="ot">&lt;-</span> <span class="fu">cor</span>(infantData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>, infantData<span class="sc">$</span>Rings)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation for Males: "</span>, maleCor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation for Males:  0.510996723795907"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation for Females: "</span>, femaleCor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation for Females:  0.405907019837356"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Correlation for Infants: "</span>, infantCor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Correlation for Infants:  0.725435674284465"</code></pre>
 </div>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>maxRingIndex <span class="ot">&lt;-</span> <span class="fu">which.max</span>(abaloneData<span class="sc">$</span>Rings)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Whole weight for most rings: "</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Whole Weight</span><span class="st">`</span>[maxRingIndex]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Whole weight for most rings:  1.8075"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Shucked weight for most rings: "</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shucked Weight</span><span class="st">`</span>[maxRingIndex]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Shucked weight for most rings:  0.7055"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Viscera weight for most rings: "</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>[maxRingIndex]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Viscera weight for most rings:  0.3215"</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Shell weight for most rings: "</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>[maxRingIndex]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Shell weight for most rings:  0.475"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>isVisceraLarger <span class="ot">&lt;-</span> <span class="cf">function</span>(visceraWeight, shellWeight) {</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(visceraWeight)) {</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (visceraWeight[i] <span class="sc">&gt;</span> shellWeight[i]) {</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>      output <span class="ot">&lt;-</span> <span class="fu">c</span>(output, <span class="cn">TRUE</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      output <span class="ot">&lt;-</span> <span class="fu">c</span>(output, <span class="cn">FALSE</span>)</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>isVisceraLargerData <span class="ot">&lt;-</span> <span class="fu">isVisceraLarger</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>)</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>visceraLarger <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(isVisceraLargerData <span class="sc">==</span> <span class="cn">TRUE</span>))</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>totalData <span class="ot">&lt;-</span> <span class="fu">length</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>)</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Percent viscera &gt; shell: "</span>, ((visceraLarger <span class="sc">/</span> totalData) <span class="sc">*</span> <span class="dv">100</span>), <span class="st">"%"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Is Viscera Weight Larger than Shell Weight</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param visceraWeight numeric vector</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param shellWeight numeric vector of same length as visceraWeight</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns vector of same length as input, but with TRUE or FALSE; TRUE indicates viscera weight is greater than shell weight; false indicates the opposite</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>isVisceraLarger <span class="ot">&lt;-</span> <span class="cf">function</span>(visceraWeight, shellWeight) {</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(visceraWeight)) {</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (visceraWeight[i] <span class="sc">&gt;</span> shellWeight[i]) {</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>      output <span class="ot">&lt;-</span> <span class="fu">c</span>(output, <span class="cn">TRUE</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>      output <span class="ot">&lt;-</span> <span class="fu">c</span>(output, <span class="cn">FALSE</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>isVisceraLargerData <span class="ot">&lt;-</span> <span class="fu">isVisceraLarger</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>, abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Shell Weight</span><span class="st">`</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>visceraLarger <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">which</span>(isVisceraLargerData <span class="sc">==</span> <span class="cn">TRUE</span>))</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>totalData <span class="ot">&lt;-</span> <span class="fu">length</span>(abaloneData<span class="sc">$</span><span class="st">`</span><span class="at">Viscera Weight</span><span class="st">`</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Percent viscera &gt; shell: "</span>, ((visceraLarger <span class="sc">/</span> totalData) <span class="sc">*</span> <span class="dv">100</span>), <span class="st">"%"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Percent viscera &gt; shell:  6.511850610486 %"</code></pre>
 </div>
 </div>
-<p><strong>ANSWER</strong> 1. Shell weight has the highest correlation with rings. 2. Shell weight and rings have the highest correlation for infants. 3. The abalone with the most rings has the following weights: Whole weight = 1.8075; Shucked weight = 0.7055; Viscera weight = 0.3215; Shell weight = 0.475. 4. 6.512% of abalones have a viscera weight larger than their shell weight.</p>
+<p><em>ANSWER</em></p>
+<ol type="1">
+<li>Shell weight has the highest correlation with rings.</li>
+<li>Shell weight and rings have the highest correlation for infants.</li>
+<li>The abalone with the most rings has the following weights: Whole weight = 1.8075; Shucked weight = 0.7055; Viscera weight = 0.3215; Shell weight = 0.475. 4. 6.512% of abalones have a viscera weight larger than their shell weight.</li>
+</ol>
+<p><strong>Problem 2</strong></p>
+<p><strong>2a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in data</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>foodData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/gracerobertson/Desktop/stats506/food_expenditure.csv"</span>, <span class="at">sep =</span> <span class="st">","</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify column names</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(foodData) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ID"</span>, <span class="st">"Age"</span>, <span class="st">"NumDependents"</span>, <span class="st">"State"</span>, <span class="st">"TypeCurrency"</span>, <span class="st">"TotalExpenditure"</span>, </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"GroceryExpenditure"</span>, <span class="st">"DiningExpenditure"</span>, <span class="st">"MiscExpenditure"</span>, </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"NumTimesDining"</span>, <span class="st">"AlcoholIncluded"</span>, <span class="st">"FoodAssistancePrograms"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict data to only US dollars</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>foodDataUS <span class="ot">&lt;-</span> foodData[foodData<span class="sc">$</span>TypeCurrency <span class="sc">==</span> <span class="st">"USD"</span>,]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Length of total food data: "</span>, <span class="fu">nrow</span>(foodData)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Length of total food data:  262"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Length of US food data: "</span>, <span class="fu">nrow</span>(foodDataUS)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Length of US food data:  230"</code></pre>
+</div>
+</div>
+<p><strong>2d)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data related to age</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule: remove NA; looking at data from people aged 18-85</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(foodDataUS)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> foodDataClean[foodDataClean<span class="sc">$</span>Age <span class="sc">&gt;</span> <span class="dv">18</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>Age <span class="sc">&lt;</span> <span class="dv">85</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2e)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data related to state</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule: remove blank values; look at data only from midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI)</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> foodDataClean[foodDataClean<span class="sc">$</span>State <span class="sc">!=</span> <span class="st">""</span>,]</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> foodDataClean[foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"IL"</span> <span class="sc">|</span> </span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"IN"</span> <span class="sc">|</span> </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"IA"</span> <span class="sc">|</span> </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"KS"</span> <span class="sc">|</span> </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"MI"</span> <span class="sc">|</span> </span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"MN"</span> <span class="sc">|</span> </span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"MO"</span> <span class="sc">|</span> </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"NE"</span> <span class="sc">|</span> </span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"ND"</span> <span class="sc">|</span> </span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"OH"</span> <span class="sc">|</span> </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"SD"</span> <span class="sc">|</span> </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>                                 foodDataClean<span class="sc">$</span>State <span class="sc">==</span> <span class="st">"WI"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2f)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data related to four food expenditure variables</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule: remove blank values, remove negative values</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> foodDataClean[foodDataClean<span class="sc">$</span>TotalExpenditure <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>TotalExpenditure <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>GroceryExpenditure <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>GroceryExpenditure <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>DiningExpenditure <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>DiningExpenditure <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>MiscExpenditure <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> foodDataClean<span class="sc">$</span>MiscExpenditure <span class="sc">&gt;</span> <span class="dv">0</span>,] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2g)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data related to # of times dining out</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rule: only look at people that are primarily making food at home (&lt; 10 times dining out)</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>foodDataClean <span class="ot">&lt;-</span> foodDataClean[foodDataClean<span class="sc">$</span>NumTimesDining <span class="sc">&lt;</span> <span class="dv">10</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>2h)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Report final observations after cleaning</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Number of observations after cleaning: "</span>, <span class="fu">nrow</span>(foodDataClean)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Number of observations after cleaning:  20"</code></pre>
+</div>
+</div>
+<p><em>ANSWER</em></p>
+<p>Rules:</p>
+<ol type="1">
+<li>Only data from the United States</li>
+<li>Remove rows with a field that is NA</li>
+<li>Only use ages 18-85 to represent all adults</li>
+<li>Only look at data from Midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI)</li>
+<li>For food expenditures, remove blank or negative values 6. Only look at people who are primarily making food at home (&lt; 10 times dining out)</li>
+</ol>
+<p>There were only 20 observations left after this cleaning.</p>
+<p><strong>Problem 3</strong></p>
+<p><strong>3a)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Find the next number in its Collatz sequence</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param input a positive integer</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns a positive integer </span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>nextCollatz <span class="ot">&lt;-</span> <span class="cf">function</span>(input) {</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if it is a number, integer, and positive</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(input)) {</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be a positive integer"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input <span class="sc">!=</span> <span class="fu">floor</span>(input)) { <span class="co"># </span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be an integer"</span>)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be positive"</span>)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ((input <span class="sc">%%</span> <span class="dv">2</span>) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Even numbers</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">=</span> input<span class="sc">/</span><span class="dv">2</span></span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Odd numbers</span></span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>    output <span class="ot">=</span> (<span class="dv">3</span> <span class="sc">*</span> input) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Examples</span></span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a><span class="fu">nextCollatz</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nextCollatz</span>(<span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p><strong>3b)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Find the Collatz Sequence for a Given Input</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param input a positive integer</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns a list containing the vector of the entries in the Collatz sequence, beginning at the input and ending at 1; and the length of the Collatz seqeunce</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>collatzSequence <span class="ot">&lt;-</span> <span class="cf">function</span>(input) {</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if it is a number, integer, and positive</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(input)) {</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be a positive integer"</span>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input <span class="sc">!=</span> <span class="fu">floor</span>(input)) { <span class="co"># </span></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be an integer"</span>)</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (input <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"Input must be positive"</span>)</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create output list with an empty vector</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  vector <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Enter in first input to the sequence</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>  vector <span class="ot">&lt;-</span> <span class="fu">c</span>(vector, input, <span class="fu">nextCollatz</span>(input))</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># until the last value of output is 1, keep adding next value</span></span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (vector[<span class="fu">length</span>(vector)] <span class="sc">!=</span> <span class="dv">1</span>) {</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>    nextValue <span class="ot">&lt;-</span> <span class="fu">nextCollatz</span>(vector[<span class="fu">length</span>(vector)])</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>    vector <span class="ot">&lt;-</span> <span class="fu">c</span>(vector, nextValue)</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put the vector into a list for the proper output</span></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">list</span>(vector, <span class="fu">length</span>(vector))</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(output)</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Examples</span></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a><span class="fu">collatzSequence</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1]  5 16  8  4  2  1
+
+[[2]]
+[1] 6</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collatzSequence</span>(<span class="dv">19</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+ [1] 19 58 29 88 44 22 11 34 17 52 26 13 40 20 10  5 16  8  4  2  1
+
+[[2]]
+[1] 21</code></pre>
+</div>
+</div>
+<p><strong>3c)</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial values</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>inputValues <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">:</span><span class="dv">500</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>maxLength <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>maxInput <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>minLength <span class="ot">&lt;-</span> <span class="dv">100000000</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>minInput <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through all input values and compare the lengths to the ones before to find maximum</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(inputValues))) {</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>  currentCollatz <span class="ot">&lt;-</span> <span class="fu">collatzSequence</span>(inputValues[i])</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>  currentSeqLength <span class="ot">&lt;-</span> currentCollatz[[<span class="dv">2</span>]]</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (currentSeqLength <span class="sc">&gt;</span> maxLength) {</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    maxLength <span class="ot">&lt;-</span> currentSeqLength</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    maxInput <span class="ot">&lt;-</span> inputValues[i]</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (currentSeqLength <span class="sc">&lt;</span> minLength) { </span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>    minLength <span class="ot">&lt;-</span> currentSeqLength </span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>    minInput <span class="ot">&lt;-</span> inputValues[i]</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Max length: "</span>, maxLength, <span class="st">" with input: "</span>, maxInput))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Max length:  144  with input:  327"</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Min length: "</span>, minLength, <span class="st">" with input: "</span>, minInput))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Min length:  8  with input:  128"</code></pre>
+</div>
+</div>
+<p><em>ANSWER</em></p>
+<p>The longest Collatz sequence is found with the input of 327. This sequence has a length of 144. The shortest Collatz sequence is found with the input of 128. This sequence has a length of 8.</p>
 
 </main>
 <!-- /main column -->

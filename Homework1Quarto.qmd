@@ -1,6 +1,9 @@
 ---
 title: "Homework1"
-format: html
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 editor: visual
 ---
 
@@ -30,7 +33,8 @@ print(paste("Number of Female Observations: ", numFData))
 print(paste("Number of Infant Observations: ", numIData))
 ```
 
-**ANSWER**
+*ANSWER* 
+
 There are 1528 male observations, 1307 female observations, and 1342 infant observations.
 
 **1c)**
@@ -92,11 +96,11 @@ totalData <- length(abaloneData$`Viscera Weight`)
 print(paste("Percent viscera > shell: ", ((visceraLarger / totalData) * 100), "%"))
 ```
 
-**ANSWER**
-1.  Shell weight has the highest correlation with rings.
-2.  Shell weight and rings have the highest correlation for infants.
-3.  The abalone with the most rings has the following weights: Whole weight = 1.8075; Shucked weight = 0.7055; Viscera weight = 0.3215; Shell weight = 0.475.
-4.  6.512% of abalones have a viscera weight larger than their shell weight.
+*ANSWER* 
+
+1. Shell weight has the highest correlation with rings. 
+2. Shell weight and rings have the highest correlation for infants. 
+3. The abalone with the most rings has the following weights: Whole weight = 1.8075; Shucked weight = 0.7055; Viscera weight = 0.3215; Shell weight = 0.475. 4. 6.512% of abalones have a viscera weight larger than their shell weight.
 
 **Problem 2**
 
@@ -178,17 +182,17 @@ foodDataClean <- foodDataClean[foodDataClean$NumTimesDining < 10,]
 print(paste("Number of observations after cleaning: ", nrow(foodDataClean)))
 ```
 
-**ANSWER**
+*ANSWER*
 
-Rules
-1. Only data from the United States
-2. Remove rows with a field that is NA
-3. Only use ages 18-85 to represent all adults
-4. Only look at data from Midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI)
-5. For food expenditures, remove blank or negative values
-6. Only look at people who are primarily making food at home (< 10 times dining out)
+Rules:
 
-There were only 20 observations left after this cleaning. 
+1. Only data from the United States 
+2. Remove rows with a field that is NA 
+3. Only use ages 18-85 to represent all adults 
+4. Only look at data from Midwest states (IL, IN, IA, KS, MI, MN, MO, NE, ND, OH, SD, WI) 
+5. For food expenditures, remove blank or negative values 6. Only look at people who are primarily making food at home (< 10 times dining out)
+
+There were only 20 observations left after this cleaning.
 
 **Problem 3**
 
@@ -271,35 +275,32 @@ collatzSequence(19)
 # Set initial values
 inputValues <- 100:500
 maxLength <- 0
-maxIndex <- -1
-#minLength <- 100000000
-#minIndex <- -1
-
-## SEP 9 -- CODE IS NOT WORKING, BOTH MAX AND MIN ARE SET TO LAST VALUE, NOT ACTUAL VALUE
+maxInput <- -1
+minLength <- 100000000
+minInput <- -1
 
 # loop through all input values and compare the lengths to the ones before to find maximum
-for (i in length(inputValues)) {
+for (i in 1:(length(inputValues))) {
   currentCollatz <- collatzSequence(inputValues[i])
   currentSeqLength <- currentCollatz[[2]]
   
-  maxLength <- max(maxLength, currentSeqLength)
+  if (currentSeqLength > maxLength) {
+    maxLength <- currentSeqLength
+    maxInput <- inputValues[i]
+  }
   
-  #if (currentSeqLength > maxLength) {
-  #  maxLength <- currentSeqLength
-  #  maxIndex <- i
-  #}
-  
-
+  if (currentSeqLength < minLength) { 
+    minLength <- currentSeqLength 
+    minInput <- inputValues[i]
+  }
 }
 
-print(paste("Max length: ", maxLength, " found at: ", maxIndex))
-#print(paste("Min length: ", minLength, " found at: ", minIndex))
+print(paste("Max length: ", maxLength, " with input: ", maxInput))
+print(paste("Min length: ", minLength, " with input: ", minInput))
 
 ```
 
-```{r}
+*ANSWER*
 
-  if (currentSeqLength < minLength) {
-    minLength <- currentSeqLength
-    minIndex <- i
-  }
+The longest Collatz sequence is found with the input of 327. This sequence has a length of 144. 
+The shortest Collatz sequence is found with the input of 128. This sequence has a length of 8.
